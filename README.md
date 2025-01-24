@@ -1,124 +1,131 @@
 # -Personalized-Student-Recommendations
 
 
-Here’s a sample `README.md` file for your project. You can save it as `README.md` and include it in your GitHub repository.
 
----
 
-# Personalized Student Recommendations System
 
-This project analyzes quiz performance data and provides students with personalized recommendations to improve their preparation. The solution is designed for NEET aspirants and uses Python to process both historical and current quiz data.
+# Personalized Student Recommendations - Project
 
-## Table of Contents
-- [Overview](#overview)
-- [Features](#features)
-- [Setup Instructions](#setup-instructions)
-- [Project Structure](#project-structure)
-- [Approach Description](#approach-description)
-- [Usage](#usage)
-- [Sample Visualizations](#sample-visualizations)
+## Project Overview
 
----
-
-## Overview
-
-The Personalized Student Recommendations System leverages quiz data to:
-1. Analyze student performance trends.
-2. Highlight strengths, weaknesses, and areas of improvement.
-3. Provide actionable recommendations to enhance preparation.
+This project provides a Python-based solution to analyze quiz performance and offer personalized recommendations to students to improve their preparation. The application uses historical quiz data to identify weak areas, generate insights, and suggest actionable steps to improve the student’s quiz performance.
 
 ## Features
 
-- **Data Analysis**: Understand student performance by topic, difficulty level, and response accuracy.
-- **Insight Generation**: Identify weak areas and improvement trends.
-- **Personalized Recommendations**: Suggest focus areas for better results.
-- **Student Persona Analysis**: Categorize students based on their strengths and weaknesses.
-
----
+- Analyzes both current and historical quiz data.
+- Identifies weak areas, trends in improvement, and performance gaps.
+- Provides personalized recommendations on topics, question types, and difficulty levels to focus on.
+- A simple web API built with Flask that can be interacted with via POST requests.
 
 ## Setup Instructions
 
+Follow the steps below to set up the project locally.
+
 ### Prerequisites
-- Python 3.7 or higher
-- Required Python libraries: pandas, numpy, matplotlib, seaborn, flask (for the API)
 
-### Installation
-1. Clone this repository:
-   ```bash
-   git clone <GitHub_Repo_Link>
-   cd Personalized-Student-Recommendations
-   ```
-2. Install dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
-3. Run the Flask API:
-   ```bash
-   python app.py
-   ```
-4. Access the API at `http://127.0.0.1:5000/` in your browser or API client (e.g., Postman).
+Before running this project, make sure you have the following installed:
 
----
+- Python 3.6+
+- `pip` for Python package installation
 
-## Project Structure
+### Step 1: Clone the repository
 
-```
-Personalized-Student-Recommendations/
-│
-├── data/
-│   ├── historical_data.csv          # Historical quiz data
-│   ├── current_quiz_data.csv        # Current quiz data
-│   └── sample_api_output.csv        # Example API output
-│
-├── visualizations/
-│   ├── student_performance_trends.png
-│   ├── performance_breakdown.png
-│   └── improvement_over_time.png
-│
-├── app.py                           # Flask API code
-├── analysis.py                      # Data analysis and visualization
-├── requirements.txt                 # Python dependencies
-├── README.md                        # Project documentation
+```bash
+git clone <repository_url>
+cd personalized-student-recommendations
 ```
 
+### Step 2: Install dependencies
+
+Install the required Python libraries by running the following command in your terminal:
+
+```bash
+pip install -r requirements.txt
+```
+
+This will install the necessary libraries:
+- Flask
+- pandas
+
+### Step 3: Run the application
+
+Once the dependencies are installed, you can start the Flask web server using the following command:
+
+```bash
+python app.py
+```
+
+This will start a web server at `http://127.0.0.1:5000/`.
+
+### Step 4: Test the API
+
+You can interact with the API using any API testing tool (such as Postman) or by using `curl` in your terminal. To test the POST endpoint for personalized recommendations, you can send a `POST` request to `http://127.0.0.1:5000/recommend` with the appropriate quiz data in JSON format.
+
+### Sample Request:
+
+```json
+{
+  "user_id": "123",
+  "current_quiz_data": {
+    "questions": [
+      {"id": 1, "topic": "Math", "selected_option": 2, "correct_option": 1},
+      {"id": 2, "topic": "Science", "selected_option": 3, "correct_option": 3}
+    ]
+  },
+  "historical_quiz_data": [
+    {"quiz_id": "q1", "topic": "Math", "score": 70, "question_response_map": {1: 2, 2: 3}},
+    {"quiz_id": "q2", "topic": "Science", "score": 85, "question_response_map": {1: 1, 2: 2}}
+  ]
+}
+```
+
+### Sample Response:
+
+```json
+{
+  "recommendations": [
+    "Focus on improving your Math knowledge by practicing related topics.",
+    "Try more practice questions with higher difficulty to boost performance."
+  ]
+}
+```
+
+## Project Approach
+
+1. **Data Collection**: The application takes both current quiz data and historical quiz data for a given user.
+   
+2. **Data Analysis**: Using pandas, we analyze the historical data to identify trends such as weak topics, incorrect responses, and general performance gaps. We also analyze the current quiz data to provide real-time insights into how the student is performing.
+
+3. **Recommendations**: Based on the analysis, personalized recommendations are provided. For example, the application might suggest focusing more on certain topics or attempting more difficult questions to improve performance.
+
+4. **API Endpoint**: The application exposes a `POST` API endpoint to allow users to send their quiz data and receive personalized recommendations.
+
+## Screenshots
+
+### Sample Quiz Performance Data:
+
+![Sample Quiz Performance](./screenshots/quiz-performance.png)
+
+### Sample Recommendations:
+
+![Sample Recommendations](./screenshots/recommendations.png)
+
+## Insights Summary
+
+- The application analyzes quiz data to highlight weak areas.
+- Personalized recommendations focus on improvement.
+- The output helps students target areas for better preparation.
+
+## Demo Video
+
+You can find a short demonstration video of the script in action (./demo-video.mp4).
+
 ---
 
-## Approach Description
+### Additional Notes:
 
-### Step 1: Data Analysis
-- Analyzed historical and current quiz data to extract meaningful insights.
-- Categorized questions by difficulty and topic for focused recommendations.
+- Make sure to replace the placeholders (`<repository_url>`, `./screenshots/quiz-performance.png`, `./demo-video.mp4`, etc.) with actual links or paths based on your project folder structure.
+- The images and video mentioned in the README need to be generated from your local setup or mock-ups if you're not providing actual data yet.
+- The `requirements.txt` file should include all dependencies:
+  ```
 
-### Step 2: Insight Generation
-- Identified weak areas by analyzing incorrect responses and low-scoring topics.
-- Visualized trends in improvement across quizzes.
-
-### Step 3: Recommendations
-- Suggested topics, question types, and difficulty levels for the student to prioritize.
-
-### Step 4: API Implementation
-- Built a Flask-based API to handle quiz data inputs and generate personalized recommendations dynamically.
-
----
-
-## Usage
-
-1. Upload quiz data (`historical_data.csv` and `current_quiz_data.csv`) to the `data/` folder.
-2. Start the API:
-   ```bash
-   python app.py
-   ```
-3. Use the endpoint `/recommend` to get recommendations based on quiz performance.
-
----
-
-## Sample Visualizations
-
-### 1. **Student Performance Trends**
-![Student Performance Trends](visualizations/student_performance_trends.png)
-
-### 2. **Performance Breakdown**
-![Performance Breakdown](visualizations/performance_breakdown.png)
-
-### 3. **Improvement Over Time**
-![Improvement Over Time](visualizations/improvement_over_time.png)
